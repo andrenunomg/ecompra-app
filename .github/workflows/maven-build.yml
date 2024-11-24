@@ -1,0 +1,33 @@
+name: Maven Build and Test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and Test Microservices
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service:
+          - product-service
+          #- order-service
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17' # Update the version as per your project requirements
+
+      - name: Build and Test Service
+        working-directory: ${{ matrix.service }}
+        run: |
+          mvn clean install
+          mvn test
