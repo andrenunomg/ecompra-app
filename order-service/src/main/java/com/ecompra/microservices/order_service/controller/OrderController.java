@@ -17,10 +17,30 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public String placeOrder(@RequestBody OrderDto orderRequest) {
-        orderService.placeOrder(orderRequest);
-        return "Order Placed Successfully";
+        OrderDto order = orderService.placeOrder(orderRequest);
+        return "Order Placed Successfully: " + order.toString();
+    }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public String getAllOrders(@RequestBody OrderDto orderRequest) {
+        //TO DO
+        return null;
+    }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String changeOrder(@RequestBody OrderDto orderRequest) {
+        //TO DO
+        return null;
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String deleteOrder(@RequestBody OrderDto orderRequest) {
+        return null;
     }
 }
