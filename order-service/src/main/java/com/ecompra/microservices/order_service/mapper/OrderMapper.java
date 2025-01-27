@@ -3,7 +3,9 @@ package com.ecompra.microservices.order_service.mapper;
 
 import com.ecompra.microservices.order_service.dto.OrderDto;
 import com.ecompra.microservices.order_service.model.Order;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderMapper {
 
     public Order mapOrderDtoToOrder(OrderDto dto) {
