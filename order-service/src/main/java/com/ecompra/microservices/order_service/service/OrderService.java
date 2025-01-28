@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -28,17 +28,19 @@ public class OrderService {
     }
 
     public List<OrderDto> getAllOrders() {
-        //TO DO
-        return null;
+        return orderRepository.findAll().stream().map(orderMapper::mapOrderToOrderDto).collect(Collectors.toList());
     }
 
     public OrderDto changeOrder(OrderDto orderRequest) {
-        //TO DO
+        if (orderRequest.id() != null) {
+            Order order = orderMapper.mapOrderDtoToOrder(orderRequest);
+            return orderMapper.mapOrderToOrderDto(orderRepository.save(order));
+        }
         return null;
     }
 
-    public boolean deleteOrder(UUID orderId) {
-        return false;
+    public void deleteOrder(Long orderId) {
+        orderRepository.deleteById(orderId);
     }
 
 }

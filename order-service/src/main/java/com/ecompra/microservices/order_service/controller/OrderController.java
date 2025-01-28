@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/order")
 public class OrderController {
@@ -25,22 +27,21 @@ public class OrderController {
     }
 
     @GetMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public String getAllOrders(@RequestBody OrderDto orderRequest) {
-        //TO DO
-        return null;
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<OrderDto> getAllOrders() {
+        List<OrderDto> orders = orderService.getAllOrders();
+        return orders;
     }
 
     @PutMapping()
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String changeOrder(@RequestBody OrderDto orderRequest) {
-        //TO DO
-        return null;
+    public OrderDto changeOrder(@RequestBody OrderDto orderRequest) {
+        return orderService.changeOrder(orderRequest);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String deleteOrder(@RequestBody OrderDto orderRequest) {
-        return null;
+    public void deleteOrder(@RequestBody OrderDto orderRequest) {
+        orderService.deleteOrder(orderRequest.id());
     }
 }
