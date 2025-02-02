@@ -1,5 +1,6 @@
 package com.ecompra.microservices.order_service.service;
 
+import com.ecompra.microservices.order_service.client.InventoryClient;
 import com.ecompra.microservices.order_service.dto.OrderDto;
 import com.ecompra.microservices.order_service.mapper.OrderMapper;
 import com.ecompra.microservices.order_service.model.Order;
@@ -15,16 +16,23 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final InventoryClient inventoryClient;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper) {
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, InventoryClient inventoryClient, InventoryClient inventoryClient1) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.inventoryClient = inventoryClient1;
     }
 
     public OrderDto placeOrder(OrderDto orderRequest) {
-        Order order = orderMapper.mapOrderDtoToOrder(orderRequest);
-        return orderMapper.mapOrderToOrderDto(orderRepository.save(order));
+        boolean isProductInStock = inventoryClient.isInStock(orderRequest.skuCode(), orderRequest.quantity());
+        if(isProductInStock) {
+            Order order = orderMapper.mapOrderDtoToOrder(orderRequest);
+            return orderMapper.mapOrderToOrderDto(orderRepository.save(order));
+        } else {
+            throw  new RuntimeException("Product not in stock");
+        }
     }
 
     public List<OrderDto> getAllOrders() {
