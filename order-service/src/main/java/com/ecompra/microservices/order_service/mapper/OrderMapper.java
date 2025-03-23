@@ -18,6 +18,6 @@ public class OrderMapper {
     }
 
     public OrderDto mapOrderToOrderDto(Order order) {
-        return new OrderDto(order.getId(), order.getOrderNumber(), order.getSkuCode(), order.getPrice(), order.getQuantity());
+        return new OrderDto(order.getId(), order.getOrderNumber(), order.getSkuCode(), order.getPrice(), order.getQuantity(), null);
     }
 }
