@@ -20,7 +20,6 @@ A modern e-commerce application built with **Angular**, **Spring Boot 3**, and a
 - Event-driven architecture with **Apache Kafka**.
 - Authentication and authorization via **Keycloak**.
 - Deployment orchestration with **Docker** and **Kubernetes**.
-- Seamless RESTful communication and integration with **OpenAPI**.
 
 ---
 
@@ -47,9 +46,6 @@ A modern e-commerce application built with **Angular**, **Spring Boot 3**, and a
 ### Authentication and Authorization:
 - **Keycloak**
 
-### API Documentation:
-- **OpenAPI (Swagger)**
-
 ### Continuous Integration:
 - **GitHub Actions** for build and test automation
 
@@ -63,5 +59,9 @@ A modern e-commerce application built with **Angular**, **Spring Boot 3**, and a
 - [TASK001] Set up microservices configuratIon.
 - [TASK002] Product Service implementation
 - [TASK003] Order Service implementation
+- [TASK004] Inventory Service implementation
+- [TASK005] API Gateway implementation
+- [TASK006] Circuit Breaker implementation
+- [TASK007] Notification Service implementation
 
 ---
